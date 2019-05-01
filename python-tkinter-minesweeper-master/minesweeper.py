@@ -5,12 +5,58 @@ import random
 from collections import deque
 from tkinter import messagebox
 import time
-import numpy
+#import cv2 as cv
+import numpy as np
+import os
 
+#from PIL import ImageGrab #For windows
+#import tensorflow as tf
+import pyscreenshot as ImageGrab
+
+# A simple Python3 program to find
+# maximum score that
+# maximizing player can get
+"""
+import math
+
+
+def minimax(curDepth, nodeIndex,
+            maxTurn, scores,
+            targetDepth):
+    # base case : targetDepth reached
+    if (curDepth == targetDepth):
+        return scores[nodeIndex]
+
+    if (maxTurn):
+        return max(minimax(curDepth + 1, nodeIndex * 2,
+                           False, scores, targetDepth),
+                   minimax(curDepth + 1, nodeIndex * 2 + 1,
+                           False, scores, targetDepth))
+
+    else:
+        return min(minimax(curDepth + 1, nodeIndex * 2,
+                           True, scores, targetDepth),
+                   minimax(curDepth + 1, nodeIndex * 2 + 1,
+                           True, scores, targetDepth))
+
+    # Driver code
+
+
+scores = [3, 5, 2, 9, 12, 5, 23, 23]
+
+treeDepth = math.log(len(scores), 2)
+
+print("The optimal value is : ", end="")
+print(minimax(0, 0, True, scores, treeDepth))
+"""
+
+# Globals
+# ------------------
+x_pad = 562.5
+y_pad = 280
 class Minesweeper:
-
     def __init__(self, master):
-
+        # print(1)
         # import images
         self.tile_plain = PhotoImage(file="images/tile_plain.gif")
         self.tile_clicked = PhotoImage(file="images/tile_clicked.gif")
@@ -61,13 +107,15 @@ class Minesweeper:
                                 0 ]
             self.buttons[x][0].bind('<Button-1>', self.lclicked_wrapper(x))
             self.buttons[x][0].bind('<Button-3>', self.rclicked_wrapper(x))
+            # print(2)
+
 
             # calculate coords:
             y_coord += 1
             if y_coord == 10:
                 y_coord = 0
                 x_coord += 1
-        
+
         # lay buttons in grid
         for key in self.buttons:
             self.buttons[key][0].grid(row=self.buttons[key][4][0], column=
@@ -104,6 +152,7 @@ class Minesweeper:
 
         self.label3 = Label(frame, text="Flags: "+str(self.flags))
         self.label3.grid(row=11, column=4, columnspan=5)
+        # print(3)
 
     ## End of __init__
 
@@ -119,6 +168,7 @@ class Minesweeper:
 
     def rclicked_wrapper(self, x):
         return lambda Button: self.rclicked(self.buttons[x])
+
 
     def lclicked(self, button_data):
         if button_data[1] == 1: #if a mine
@@ -194,7 +244,7 @@ class Minesweeper:
             self.check_tile(key+9, queue)      #bottom right
             self.check_tile(key+10, queue)     #bottom middle
             self.check_tile(key+11, queue)     #bottom left
-    
+
     def gameover(self):
         messagebox.showinfo("Game Over", "You Lose!")
         global root
@@ -207,7 +257,30 @@ class Minesweeper:
 
     def update_flags(self):
         self.label3.config(text="Flags: "+str(self.flags))
+
+    def screenGrab(self):
+        #End : 781.5, 497
+        box = (x_pad+1, y_pad+1, x_pad+219, y_pad+217)
+        list = []
+        im = ImageGrab.grab(box)
+        path = os.getcwd() + '/full_snap__' + str(int(time.time())) +'.png'
+        im.save(path)
+        im2 = np.asanyarray(im)
+        # arrayImageSize: 216, No. of tiles : 100
+        # 216 / 100 = 2.16 ~= 2 for each tile
+        for x in range(1, 9):
+            imgg = PhotoImage(file="images/tile_"+str(x)+".gif")
+
+        print(len(im2))
+        for i in range(0, 216):
+            for j in range(0, 218):
+                print(im2[i][j])
+                if j == 21:
+                    print()
+            print()
+
 ### END OF CLASSES ###
+
 
 def main():
     global root
@@ -217,9 +290,36 @@ def main():
     root.title("Minesweeper")
     # create game instance
     minesweeper = Minesweeper(root)
+    # Minesweeper.screenGrab(root)
+    # print ("Current date & time " + time.strftime("%c"))
+    #time.sleep(2)
+    # print("Current date & time " + time.strftime("%c"))
     # run event loop
 
-    root.mainloop()
+def AI():
+    Minesweeper.screenGrab(5)
 
 if __name__ == "__main__":
+    # path = '/media/usama/E/47248427_1491541777657387_2195934353727422464_o.jpg'
+    #img1 = cv.imread(path, 1)
+
+#    cv.imshow('media', img1)
     main()
+    #AI()
+    # time.sleep(5)
+    #im = ImageGrab.grab()
+    #im.save('screenshot.png')
+    #im2 = np.asanyarray(im)
+    #print(im2)
+
+
+    root.mainloop()
+    #for i in range(1, 10):
+     #   Minesweeper.screenGrab(0)
+
+    # for i in range(1, 10):
+    #     im = ImageGrab.grab()
+    #     im.save('screenshot.png')
+    #     im2 = np.asanyarray(im)
+    #     print(im2)
+    # im.show()
