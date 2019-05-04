@@ -58,14 +58,14 @@ class Minesweeper:
     def __init__(self, master):
         # print(1)
         # import images
-        self.tile_plain = PhotoImage(file="images/tile_plain.gif")
-        self.tile_clicked = PhotoImage(file="images/tile_clicked.gif")
-        self.tile_mine = PhotoImage(file="images/tile_mine.gif")
-        self.tile_flag = PhotoImage(file="images/tile_flag.gif")
-        self.tile_wrong = PhotoImage(file="images/tile_wrong.gif")
+        self.tile_plain = PhotoImage(file="images/tile_0.png")
+        self.tile_clicked = PhotoImage(file="images/tile_9.png")
+        self.tile_mine = PhotoImage(file="images/tile_11.png")
+        self.tile_flag = PhotoImage(file="images/tile_10.png")
+        self.tile_wrong = PhotoImage(file="images/tile_12.png")
         self.tile_no = []
         for x in range(1, 9):
-            self.tile_no.append(PhotoImage(file="images/tile_"+str(x)+".gif"))
+            self.tile_no.append(PhotoImage(file="images/tile_"+str(x)+".png"))
 
         # set up frame
         frame = Frame(master)
@@ -258,26 +258,26 @@ class Minesweeper:
     def update_flags(self):
         self.label3.config(text="Flags: "+str(self.flags))
 
-    def screenGrab(self):
-        #End : 781.5, 497
-        box = (x_pad+1, y_pad+1, x_pad+219, y_pad+217)
-        list = []
-        im = ImageGrab.grab(box)
-        path = os.getcwd() + '/full_snap__' + str(int(time.time())) +'.png'
-        im.save(path)
-        im2 = np.asanyarray(im)
-        # arrayImageSize: 216, No. of tiles : 100
-        # 216 / 100 = 2.16 ~= 2 for each tile
-        for x in range(1, 9):
-            imgg = PhotoImage(file="images/tile_"+str(x)+".gif")
-
-        print(len(im2))
-        for i in range(0, 216):
-            for j in range(0, 218):
-                print(im2[i][j])
-                if j == 21:
-                    print()
-            print()
+    # def screenGrab(self):
+    #     #End : 781.5, 497
+    #     box = (x_pad+1, y_pad+1, x_pad+219, y_pad+217)
+    #     list = []
+    #     im = ImageGrab.grab(box)
+    #     path = os.getcwd() + '/full_snap__' + str(int(time.time())) +'.png'
+    #     im.save(path)
+    #     im2 = np.asanyarray(im)
+    #     # arrayImageSize: 216, No. of tiles : 100
+    #     # 216 / 100 = 2.16 ~= 2 for each tile
+    #     for x in range(1, 9):
+    #         imgg = PhotoImage(file="images/tile_"+str(x)+".png")
+    #
+    #     print(len(im2))
+    #     for i in range(0, 216):
+    #         for j in range(0, 218):
+    #             print(im2[i][j])
+    #             if j == 21:
+    #                 print()
+    #         print()
 
 ### END OF CLASSES ###
 
@@ -296,8 +296,8 @@ def main():
     # print("Current date & time " + time.strftime("%c"))
     # run event loop
 
-def AI():
-    Minesweeper.screenGrab(5)
+# def AI():
+#     Minesweeper.screenGrab(5)
 
 if __name__ == "__main__":
     # path = '/media/usama/E/47248427_1491541777657387_2195934353727422464_o.jpg'
