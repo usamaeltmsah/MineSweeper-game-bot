@@ -24,3 +24,8 @@ pyscreenshot
 -
 pyautogui
 -
+
+TODO:
+-
+1. We need to enhance the `tile detection`, cause it consume much time to know what is the tile content.
+2. We need to make a *good algorithms* to `make the bot smarter`.
