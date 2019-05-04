@@ -5,11 +5,15 @@ Repo
 -
 https://github.com/usamaeltmsah/MineSweeper-game-bot
 
+How it works?
+-
 To run this project you will need to run the *minesweeper file first*, which will run the game. *Then* run the *MSAI* file, which do the `bot operations`
 
 **`HINT:`**
 When running the *MSAI*, make sure that *minesweeper board* is completely **visible on the screen**
 
+Requiements
+-
 This project will work good on `linux` with `python 3.5` and you need to install some libraries :
 
 tkinter
