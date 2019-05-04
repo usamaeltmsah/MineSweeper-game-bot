@@ -1,6 +1,9 @@
 # MineSweeper-game-bot
 This is a minesweeper game in python and AI to make it a **game bot**
 
+Repo
+-
+https://github.com/usamaeltmsah/MineSweeper-game-bot
 
 To run this project you will need to run the *minesweeper file first*, which will run the game. *Then* run the *MSAI* file, which do the `bot operations`
 
