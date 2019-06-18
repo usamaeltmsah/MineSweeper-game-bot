@@ -15,7 +15,7 @@ When running the *MSAI*, make sure that *minesweeper board* is completely **visi
 Requiements
 -
 - `python 3.5`
-- This project will work good on `linux` for other operating systems you may need to find similar libraries and you need to install some libraries :
+- These libraries are working good on `linux` for other operating systems you may need to find similar libraries :
 
 tkinter
 -
